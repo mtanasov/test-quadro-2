@@ -1,62 +1,41 @@
-// "use strict"
+"use strict"
 
-// const canvas = document.getElementById("canvas");
-// const ctx = canvas.getContext("2d");
+const length = 700;
+let arrFirstLast = [150, 600];
+let arrH = [150, 600];
+const arr = [];
 
-// const drawSketchMini = (x, y, w, h, coeff) => {
-//    const gap = 7;
+// console.log(arrH);
 
-//    ctx.strokeStyle = "black";
-//    ctx.strokeRect(x + w + gap, y + h + gap, w * coeff, h * coeff); //0
-//    ctx.strokeRect(x + gap + gap / 2, y + w + gap, w * coeff / 3, h * coeff);//1
-//    ctx.strokeRect(x + w + gap, y + gap / 2 * h + gap, w * coeff, h * coeff / 3);//2
-//    ctx.strokeRect(x + w * gap / 2 + gap, y + w + gap, w * coeff / 3, h * coeff);//3
-//    ctx.strokeRect(x + w + gap, y + gap / 2 + gap, w * coeff, h * coeff / 3);//4
-
-//    ctx.font = "bold 14px sans-serif";
-//    // ctx.fillText("0", x, y); //0
-//    ctx.fillText("1", x, y); //1
-//    ctx.fillText("2", x, y); //2
-//    ctx.fillText("3", x, y); //3
-//    ctx.fillText("4", x, y); //4
-//    // ctx.fillText("5", x, 1080); //5
-
-// }
-
-// drawSketchMini(10, 10, 20, 20, 2.5)
-
-let handles = [
-   {
-      "names": "622",
-      "h": 12,
-      "w": 19,
-      "length": 500,
-      "side": "l",
-      "angle": 60,
-      "thickness1": 9.25,
-      "thickness2": 4.25,
-      "groove": 4.5,
-      "depthGroove": 13.5
-   },
-   {
-      "names": "622",
-      "h": 12,
-      "w": 19,
-      "length": 500,
-      "side": "r",
-      "angle": 60,
-      "thickness1": 9.25,
-      "thickness2": 4.25,
-      "groove": 4.5,
-      "depthGroove": 13.5
+const funcCalc = (count, length, sum) => {
+   const formula1 = ((length - sum) / (count - 1));
+   for (
+      let i = 0;
+      i < count + 1;
+      i += 1
+   ) {
+      switch (true) {
+         case (i === 0):
+            console.log("i=1");
+            arrH.pop();
+            console.log(arrH);
+            break;
+         case (i === 1):
+            console.log("i = 2");
+            arrH.push(Math.ceil(arrH[0] + formula1));
+            console.log(arrH);
+            break;
+         case (i > 1 && i < count):
+            console.log("i= beetween FIRST and LAST");
+            arrH.push(Math.ceil(arrH[arrH.length - 1] + formula1));
+            console.log(arrH);
+            break;
+         case (i === count):
+            console.log("I === count");
+            arrH.push(Math.ceil(arrFirstLast[1]))
+            break;
+      }
    }
-]
+}
 
-
-let count = 0;
-handles.forEach(item => {
-   count = count + item.length;
-   return count
-})
-
-console.log(count);
+console.log(funcCalc(8, length, (arrFirstLast[0] + (length - arrFirstLast[1]))));
